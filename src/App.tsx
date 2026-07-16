@@ -248,7 +248,8 @@ export default function App() {
         : rootInput;
 
     const reply = await fetchAI(prompt, context);
-    const final = [...nextMsgs, { id: crypto.randomUUID(), sender: 'assistant', content: reply, timestamp: Date.now(), subThreads: [] }];
+    const assistantMsg: ChatMessage = { id: crypto.randomUUID(), sender: 'assistant', content: reply, timestamp: Date.now(), subThreads: [] };
+    const final = [...nextMsgs, assistantMsg];
     setMessages(final);
     persistToCloud(id, final);
   };
